@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+
+{% block content %}
+<h1 style="color:white">Welcome {{ request.user.username }}</h1>
+<h1 style="color:white">Auth status: {{request.user.is_authenticated}}</h1>
+<br>
+<br>
+<p>
+    <p style="color:white">
+        <h2 style="color:white">This is a graphical user Authentication system  in which users are authenticated using images in three different layers</h2>
+    <br>
+    <br>
+    <br >
+    <h3 style="color:white"> Login: &nbsp&nbsp&nbspTo continue login</h3>
+    <br>
+    <h3 style="color:white"> Logout: To sign out of the application</h3>
+</p>
+
+{% endblock %}

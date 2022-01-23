@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login Page
+{% endblock %}
+
+
+{% block content %}
+<div class="mx-auto" style="width: 700px; padding: 32px 0px">
+    <div class="content-section">
+        <form class="" action="" method="post" id="post-form" style="color:white">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4" style="color:white">2nd Login Phase</legend>
+            </fieldset>
+<!-- 
+            <div class="form-group" style="color:white">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username">
+            </div> -->
+
+            <br>
+            {% include 'password2.html' %}
+
+            <br>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-info" style="color:white">Next </button>
+            </div>
+        </form>
+        <!-- <div class="border-top pt-3" style="color:white"> -->
+            <!-- <small style="color:white">
+                Forgot password? <a href="{% url 'reset' %}" class="ml-2">Click here</a>
+            </small>
+        </div> -->
+        <div class="border-top pt-3" style="color:white">
+            <small  style="color:white">
+                Don't have an account? <a href="{% url 'register' %}" class="ml-2" style="color:white">Sign Up</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+<script>
+    var gpwd2_set = new Set();
+
+    function twoSelect (a, b) {
+        var res2 = a.toString() + b.toString();
+        if (gpwd2_set.has(res2)) {
+            console.log('true');
+            gpwd2_set.delete(res2);
+            document.getElementById("p"+res2).style.border = null;
+        } else {
+            gpwd2_set.add(res2);
+            document.getElementById("p"+res2).style.border = "2px solid green";
+        }
+
+        console.log(gpwd2_set);
+    }
+   
+
+    function post(path, params, method = 'post') {
+
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        const form = document.getElementById('post-form');
+        form.method = method;
+        form.action = path;
+
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+
+    // Submit post on submit
+    var form = document.getElementById('post-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log("form submitted!");
+        post('', {
+            // username: document.getElementById('username').value,
+            first_name: Array.from(gpwd2_set),
+        })
+    });
+</script>
+{% endblock %}
