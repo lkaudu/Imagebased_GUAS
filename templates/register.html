@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register Page
+{% endblock %}
+
+
+{% block content %}
+<body style= "width: 100%; height: 100%;"></body>
+<div class="mx-auto" style="width: 700px; padding: 32px 0px">
+    <div class="content-section">
+        <form class="" action="" method="post" id="post-form" style="color:white">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">1st Registration Phase</legend>
+            </fieldset>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+
+            <!-- <br> -->
+            {% include 'password1.html' %}
+            <div>
+                <fieldset class="form-group">
+                    <legend style="color:white" class="border-bottom mb-4">2nd Registration Phase</legend>
+                </fieldset>
+            {% include "password2.html" %}
+
+            <div>
+                <fieldset class="form-group">
+                    <legend style="color:white" class="border-bottom mb-4">3rd Registration Phase</legend>
+                </fieldset>
+            {% include "password3.html" %}
+            </div>
+            <div class="form-group">
+                <button type="submit"  class="btn btn-outline-info" style="color:white">Sign Up</button>
+                
+            </div>
+
+
+
+            
+        </form>
+
+        <div class="border-top pt-3" style="color:white">
+            <small  style="color:white">
+                You have an account? <a href="{% url 'login' %}" class="ml-2" style="color:blue"></a>Sign in</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+    var gpwd_set = new Set();
+    var gpwd2_set = new Set();
+    var gpwd3_set = new Set();
+
+    function onSelect(r, c) {
+        var res = r.toString() + c.toString();
+        if (gpwd_set.has(res)) {
+            console.log('true');
+            gpwd_set.delete(res);
+            document.getElementById(res).style.border = null;
+        } else {
+            gpwd_set.add(res);
+            document.getElementById(res).style.border = "2px solid red";
+        }
+
+        console.log(gpwd_set);
+    }
+    
+    function twoSelect (a, b) {
+        var res2 = a.toString() + b.toString();
+        if (gpwd2_set.has(res2)) {
+            console.log('true');
+            gpwd2_set.delete(res2);
+            document.getElementById("p"+res2).style.border = null;
+        } else {
+            gpwd2_set.add(res2);
+            document.getElementById("p"+res2).style.border = "2px solid green";
+        }
+
+        console.log(gpwd2_set);
+    }
+        
+    function threeSelect (x, y) {
+        var res3 = x.toString() + y.toString();
+        if (gpwd3_set.has(res3)) {
+            console.log('true');
+            gpwd3_set.delete(res3);
+            document.getElementById("q"+res3).style.border = null;
+        } else {
+            gpwd3_set.add(res3);
+            document.getElementById("q"+res3).style.border = "2px solid black";
+        }
+
+        console.log(gpwd3_set);
+    }
+
+    //     function twoSelect(r, c) {
+    //     var resu = document.getElementById("ptwo");
+    //     resu = r.toString() + c.toString();
+    //     if (gpwd2_set.has(resu)) {
+    //         console.log('true');
+    //         gpwd2_set.delete(resu);
+    //         document.getElementById(resu).style.border = null;
+    //     } else {
+    //         gpwd2_set.add(res);
+    //         document.getElementById(resu).style.border = "2px solid red";
+    //     }
+
+    //     console.log(gpwd2_set);
+    // }
+
+    
+    function post(path, params, method = 'post') {
+
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        const form = document.getElementById('post-form');
+        form.method = method;
+        form.action = path;
+
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+
+    // Submit post on submit
+    var form = document.getElementById('post-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log("form submitted!");
+        post('', {
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            password: Array.from(gpwd_set),
+            first_name: Array.from(gpwd2_set),
+            last_name: Array.from(gpwd3_set),
+            
+            
+        })
+    });
+</script>
+
+{% endblock %}
+                   
+                    
+
+                    
