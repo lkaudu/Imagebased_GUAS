@@ -116,10 +116,11 @@ def sendPasswordResetLinkToUser(username):
     
 
 
-def home_page(request):
+def index(request):
     # user = User.objects.all()
     # user.delete()
-    return render(request, 'home.html')
+    return render(request, 'index.html')
+    # return HttpResponse(html)
 
 
 def successful_page(request):
@@ -145,13 +146,13 @@ def register_page(request):
         except Exception:
             messages.warning(request, 'Sign up failed. Kindly pick another username')
             return redirect('register')
-        # return redirect('home')
+        # return redirect('index')
     else:
         data = {
             'p_images': get_pwd_imgs(),
         }
         return render(request, 'register.html', context=data)
-    return redirect('home')
+    return redirect('index')
 
 
 def login_page(request):
@@ -265,7 +266,7 @@ def login3_page(request):
             login(request, user)
             update_login_info(user, True)
             
-            return redirect ('home')
+            return redirect ('index')
             
     else:
         data = {
@@ -288,7 +289,7 @@ def login_from_uid(request, uid):
     except Exception:
         messages.warning(request, 'Invalid Link. Please check again!')
 
-    return redirect('home')
+    return redirect('index')
 
 
 def reset_view(request):
@@ -353,7 +354,7 @@ def passreset(request):
             # login_info.save()
             user.save()
             messages.success(request, 'Password Reset Successfully!')
-            return redirect('home')
+            return redirect('index')
 
         except Exception:
             messages.warning(request, 'Password Setup failed')
@@ -364,7 +365,7 @@ def passreset(request):
             'p_images': get_pwd_imgs(),
         }
         return render(request, 'reset.html', context=data)
-    return redirect('home')
+    return redirect('index')
 
 
 
@@ -372,4 +373,4 @@ def passreset(request):
 def logout_page(request):
     logout(request)
     messages.warning(request, 'You\'ve been logged out!')
-    return redirect('home')
+    return redirect('index')

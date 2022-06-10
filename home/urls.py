@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.http import HttpResponse
 
 from .views import (
-    home_page, 
+    index, 
     successful_page,
     register_page, 
     # register2_page,
@@ -25,7 +25,7 @@ from .views import (
 urlpatterns = [
     # url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     # path('favicon.ico', okay),
-    path('', home_page, name='home'),
+    path('', index, name='index'),
     path('', successful_page, name='Lsuccessful'),
     path('register/', register_page, name='register'),
     # path('register2/', register2_page, name='register2'),

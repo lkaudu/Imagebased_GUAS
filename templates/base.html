@@ -123,14 +123,14 @@
 <body>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
-        <!-- <a class="navbar-brand" href="{% url 'home' %}">
+        <!-- <a class="navbar-brand" href="{% url 'index' %}">
             <img src="{% static "images/13.jpg" %}" width="30" height="30" class="d-inline-block align-top"
                 alt="zzzz">
             Position Based Multi-Layer Graphical User Authentication System
         </a> -->
         <h5 style="color:white"> Image Based Multi-Layer Graphical User Authentication System</h5>
           <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" href="{% url 'home' %}" style="color:white">Home</a>
+            <a class="nav-item nav-link" href="{% url 'index' %}" style="color:white">Home</a>
             <a class="nav-item nav-link" href="{% url 'register' %}" style="color:white">Register</a>
 
             {% if request.user.is_authenticated %}

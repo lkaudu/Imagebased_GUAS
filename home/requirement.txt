@@ -1,4 +1,4 @@
 # vercel-django-example/requirements.txt
 # https://github.com/jayhale/vercel-django-example/blob/main/requirements.txt#L1
 
-Django==3.2
+Django==4.0.5
